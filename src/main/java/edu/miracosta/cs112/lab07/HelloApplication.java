@@ -4,6 +4,7 @@ import javafx.application.Application;  //abstract class used for JavaFX GUI's
 import javafx.stage.Stage;              //class for GUI window
 import javafx.scene.Scene;              //class for specific view in GUI window
 import javafx.scene.layout.VBox;        //class for layout pane, organized top-to-bottom
+import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;      //class for label component
 import javafx.scene.control.Button;     //class for button component
 import javafx.event.EventHandler;       //interface for handling events
@@ -14,9 +15,35 @@ public class HelloApplication extends Application  { //inheriting core functiona
     // TODO: follow step 25 in README.md to create reference variables
 
     /*** DRIVER main ***/
+    private Button button;
+
     public static void main(String[] args) {
-        launch(args); //method from Application class, must be called to setup javafx application
+        launch(args);
     }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        Label message = new Label("Hello World!");
+        button = new Button("Click me!");
+
+        StackPane layout = new StackPane();
+
+        layout.getChildren().add(message);
+        layout.getChildren().add(button);
+
+        Scene scene = new Scene(layout, 300, 300);
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Hello GUI  Sarah");
+        primaryStage.show();
+    }
+
+    public void handle(ActionEvent actionEvent) {
+        if(actionEvent.getSource() == button) {
+            System.out.println("Hello World!");
+        }
+}
 
     // TODO: follow steps 2-9 in README.md to create a start method
 
