@@ -19,6 +19,7 @@ public class HelloApplication extends Application implements EventHandler<Action
     private Button button;
     private Button button2;
     private Button button3;
+    private Label messageLabel;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,17 +28,21 @@ public class HelloApplication extends Application implements EventHandler<Action
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Label message = new Label("Push my buttons!");
+        messageLabel = new Label("Push my buttons!");
         Label label = new Label();
         Label label2 = new Label();
         button = new Button("Click me!");
         button2 = new Button("No click me!");
         button3 = new Button("NO click me!");
 
+        button.setOnAction(this);
+        button2.setOnAction(this);
+        button3.setOnAction(this);
+
         StackPane layout = new StackPane();
         AnchorPane anchorPane = new AnchorPane();
 
-        layout.getChildren().add(message);
+        layout.getChildren().add(messageLabel);
         layout.getChildren().add(button);
         layout.getChildren().add(button2);
         layout.getChildren().add(button3);
@@ -54,8 +59,8 @@ public class HelloApplication extends Application implements EventHandler<Action
 
 
         primaryStage.setTitle("Hello GUI : Sarah");
-        label.setText("Hello GUI World <3");
-        label2.setText("Kickass in CS!");
+        label.setText("Kickass in CS!");
+        label2.setText("Hello GUI World <3");
         AnchorPane.setTopAnchor(label, 5.0);
         AnchorPane.setLeftAnchor(label, 5.0);
         AnchorPane.setTopAnchor(label2,5.0);
@@ -74,18 +79,15 @@ public class HelloApplication extends Application implements EventHandler<Action
     }
 
     public void handle(ActionEvent actionEvent) {
-        if(actionEvent.getSource() == button) {
-            System.out.println("I have amazing day!");
-        } else{
-            if(actionEvent.getSource() == button2) {
-                System.out.println("You're the goat!");
-            }
-
-            if (actionEvent.getSource() == button3) {
-                System.out.println("Don't get lost in the sauce!");
-            }
+        if (actionEvent.getSource() == button) {
+            messageLabel.setText("The only way to do great work is to love what you do!" + "\n                              -Steve Jobs");
+        } else if (actionEvent.getSource() == button2) {
+            messageLabel.setText("You're the goat!");
+        } else if (actionEvent.getSource() == button3) {
+            messageLabel.setText("Don't get lost in the sauce!" + "\n   You're the sauce boss!");
         }
-}
+    }
+
 
     // TODO: follow steps 2-9 in README.md to create a start method
 
