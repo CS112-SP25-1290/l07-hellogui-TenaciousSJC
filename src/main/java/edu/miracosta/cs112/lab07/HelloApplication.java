@@ -20,6 +20,8 @@ public class HelloApplication extends Application implements EventHandler<Action
     private Button button2;
     private Button button3;
     private Label messageLabel;
+    private Label countLabel;
+    private int button2Clicked = 0;
 
     public static void main(String[] args) {
         launch(args);
@@ -30,10 +32,10 @@ public class HelloApplication extends Application implements EventHandler<Action
 
         messageLabel = new Label("Push my buttons!");
         Label label = new Label();
-        Label label2 = new Label();
         button = new Button("Click me!");
         button2 = new Button("No click me!");
         button3 = new Button("NO click me!");
+        countLabel = new Label();
 
         button.setOnAction(this);
         button2.setOnAction(this);
@@ -47,11 +49,12 @@ public class HelloApplication extends Application implements EventHandler<Action
         layout.getChildren().add(button2);
         layout.getChildren().add(button3);
         layout.getChildren().add(anchorPane);
+        layout.getChildren().add(countLabel);
         anchorPane.getChildren().add(label);
-        anchorPane.getChildren().add(label2);
         anchorPane.getChildren().add(button);
         anchorPane.getChildren().add(button2);
         anchorPane.getChildren().add(button3);
+        anchorPane.getChildren().add(countLabel);
 
 
 
@@ -60,11 +63,11 @@ public class HelloApplication extends Application implements EventHandler<Action
 
         primaryStage.setTitle("Hello GUI : Sarah");
         label.setText("Kickass in CS!");
-        label2.setText("Hello GUI World <3");
+        countLabel.setText("Hello GUI World!<3");
         AnchorPane.setTopAnchor(label, 5.0);
         AnchorPane.setLeftAnchor(label, 5.0);
-        AnchorPane.setTopAnchor(label2,5.0);
-        AnchorPane.setRightAnchor(label2, 5.0);
+        AnchorPane.setTopAnchor(countLabel,5.0);
+        AnchorPane.setRightAnchor(countLabel, 5.0);
         AnchorPane.setBottomAnchor(button, 10.0);
         AnchorPane.setLeftAnchor(button, 10.0);
         AnchorPane.setBottomAnchor(button2, 10.0);
@@ -82,7 +85,8 @@ public class HelloApplication extends Application implements EventHandler<Action
         if (actionEvent.getSource() == button) {
             messageLabel.setText("The only way to do great work is to love what you do!" + "\n                              -Steve Jobs");
         } else if (actionEvent.getSource() == button2) {
-            messageLabel.setText("You're the goat!");
+            button2Clicked ++;
+            countLabel.setText("\"No click me!\" button clicked: " + button2Clicked + " times.");
         } else if (actionEvent.getSource() == button3) {
             messageLabel.setText("Don't get lost in the sauce!" + "\n   You're the sauce boss!");
         }
