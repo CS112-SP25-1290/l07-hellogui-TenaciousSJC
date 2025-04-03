@@ -10,6 +10,7 @@ import javafx.scene.control.Label;      //class for label component
 import javafx.scene.control.Button;     //class for button component
 import javafx.event.EventHandler;       //interface for handling events
 import javafx.event.ActionEvent;        //class for type of event for action (like button or key pressed)
+import javafx.scene.control.TextField;
 
 public class HelloApplication extends Application implements EventHandler<ActionEvent>  { //inheriting core functionality + this class will handle events
     /*** GUI COMPONENTS ***/
@@ -22,6 +23,7 @@ public class HelloApplication extends Application implements EventHandler<Action
     private Label messageLabel;
     private Label countLabel;
     private int button2Clicked = 0;
+    private TextField inputField;
 
     public static void main(String[] args) {
         launch(args);
@@ -36,6 +38,8 @@ public class HelloApplication extends Application implements EventHandler<Action
         button2 = new Button("No click me!");
         button3 = new Button("NO click me!");
         countLabel = new Label();
+        inputField = new TextField();
+        inputField.setPromptText("Enter text here...");
 
         button.setOnAction(this);
         button2.setOnAction(this);
@@ -50,11 +54,13 @@ public class HelloApplication extends Application implements EventHandler<Action
         layout.getChildren().add(button3);
         layout.getChildren().add(anchorPane);
         layout.getChildren().add(countLabel);
+        layout.getChildren().add(inputField);
         anchorPane.getChildren().add(label);
         anchorPane.getChildren().add(button);
         anchorPane.getChildren().add(button2);
         anchorPane.getChildren().add(button3);
         anchorPane.getChildren().add(countLabel);
+        anchorPane.getChildren().add(inputField);
 
 
 
@@ -74,6 +80,9 @@ public class HelloApplication extends Application implements EventHandler<Action
         AnchorPane.setRightAnchor(button2, 118.0);
         AnchorPane.setBottomAnchor(button3, 10.0);
         AnchorPane.setRightAnchor(button3, 10.0);
+        AnchorPane.setTopAnchor(inputField, 100.0);
+        AnchorPane.setLeftAnchor(inputField, 80.0);
+        inputField.setPrefWidth(150);
 
 
         Scene scene = new Scene(layout, 300, 300);
@@ -83,12 +92,17 @@ public class HelloApplication extends Application implements EventHandler<Action
 
     public void handle(ActionEvent actionEvent) {
         if (actionEvent.getSource() == button) {
-            messageLabel.setText("The only way to do great work is to love what you do!" + "\n                              -Steve Jobs");
+            String enteredText = inputField.getText().trim();
+            if (!enteredText.isEmpty()) {
+                messageLabel.setText(enteredText);
+            } else {
+                messageLabel.setText("No text entered!");
+            }
         } else if (actionEvent.getSource() == button2) {
             button2Clicked ++;
             countLabel.setText("\"No click me!\" button clicked: " + button2Clicked + " times.");
         } else if (actionEvent.getSource() == button3) {
-            messageLabel.setText("Don't get lost in the sauce!" + "\n   You're the sauce boss!");
+            messageLabel.setText("The only way to do great work is to love what you do!" + "\n                              -Steve Jobs");
         }
     }
 
